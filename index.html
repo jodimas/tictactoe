@@ -10,9 +10,27 @@
   <div class="container">
     <h1>TicTacToe</h1>
     
-    <div id="status" class="status">Spieler X ist dran</div>
+    <div id="team-selection" class="team-selection">
+      <div id="selection-x" class="selection-step">
+        <h2>Spieler X: Wähle deinen Verein</h2>
+        <select id="player-x-team" class="team-select">
+          <option value="">-- Team wählen --</option>
+        </select>
+        <button id="confirm-x" class="confirm-btn">Bestätigen</button>
+      </div>
+      
+      <div id="selection-o" class="selection-step" style="display: none;">
+        <h2>Spieler O: Wähle deinen Verein</h2>
+        <select id="player-o-team" class="team-select">
+          <option value="">-- Team wählen --</option>
+        </select>
+        <button id="confirm-o" class="confirm-btn">Bestätigen</button>
+      </div>
+    </div>
     
-    <div id="board" class="board">
+    <div id="status" class="status"></div>
+    
+    <div id="board" class="board" style="display: none;">
       <button class="cell" data-index="0"></button>
       <button class="cell" data-index="1"></button>
       <button class="cell" data-index="2"></button>

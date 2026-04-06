@@ -53,6 +53,9 @@ h1 {
   color: #eee;
   cursor: pointer;
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cell:hover:not(.winner) {
@@ -104,4 +107,86 @@ h1 {
   h1 {
     font-size: 2rem;
   }
+}
+
+/* Team Selection Styles */
+.team-selection {
+  margin-bottom: 1.5rem;
+}
+
+.selection-step {
+  background: #0f0f23;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.selection-step h2 {
+  color: #eee;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.team-select {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #4361ee;
+  border-radius: 8px;
+  background: #1a1a2e;
+  color: #eee;
+  cursor: pointer;
+  min-width: 250px;
+  margin-right: 0.5rem;
+}
+
+.team-select:focus {
+  outline: none;
+  border-color: #6c8bef;
+}
+
+.confirm-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background: #4361ee;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.confirm-btn:hover {
+  background: #3651d4;
+  transform: translateY(-2px);
+}
+
+.confirm-btn:active {
+  transform: translateY(0);
+}
+
+/* Team Logo Styles */
+.team-logo-img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  display: block;
+}
+
+.player-label {
+  font-weight: bold;
+}
+
+.status .player-label {
+  font-weight: bold;
+}
+
+.status .player-label::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: currentColor;
+  margin-right: 8px;
+  vertical-align: middle;
 }

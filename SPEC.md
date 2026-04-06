@@ -41,6 +41,15 @@
 | F10 | Ergebnisanzeige | Anzeige "X gewinnt", "O gewinnt" oder "Unentschieden" |
 | F11 | Neustart | Button zum Zurücksetzen des Spiels |
 
+### 3.3 Vereins-Logo-Auswahl
+
+| ID | Anforderung | Beschreibung |
+|----|-------------|--------------|
+| F12 | Team-Auswahl | Vor Spielbeginn wählen beide Spieler ihren Verein |
+| F13 | Verfügbare Teams | Tasmania Berlin, TeBe Berlin, St. Pauli, SV Babelsberg 03, JFG Aschafftal |
+| F14 | Logo-Anzeige | Vereinslogos werden statt X/O im Spielfeld angezeigt |
+| F15 | Spieleranzeige mit Logo | Status zeigt Team-Namen und Logo des aktuellen Spielers |
+
 ### 3.3 Gewinnmuster
 
 ```
@@ -68,6 +77,7 @@ Diagonal:   [0,4,8], [2,4,6]
 | NF04 | Keine externen Abhängigkeiten | Nur statische Dateien (HTML, CSS, TS/JS) |
 | NF05 | TypeScript | Klare Typ-Definitionen |
 | NF06 | Modulare Struktur | Trennung von Logik und Darstellung |
+| NF07 | Inline SVG Logos | Vereinslogos als inline SVG (keine externen Bilder) |
 
 ---
 
@@ -98,12 +108,13 @@ Diagonal:   [0,4,8], [2,4,6]
 
 | Element | Farbe |
 |---------|-------|
-| Hintergrund | #f0f0f0 |
-| Spielfeld | #ffffff |
-| Spieler X | #e74c3c (Rot) |
-| Spieler O | #3498db (Blau) |
-| Linien | #333333 |
-| Hover (freies Feld) | rgba(0,0,0,0.1) |
+| Hintergrund | #1a1a2e |
+| Spielfeld | #1a1a2e |
+| Spieler X | Team-Logo SVG |
+| Spieler O | Team-Logo SVG |
+| Linien | #0f0f23 |
+| Hover (freies Feld) | #252542 |
+| Akzent | #4361ee |
 
 ### 5.3 Typografie
 
@@ -122,11 +133,24 @@ type CellValue = Player | null;
 type Board = CellValue[];
 type GameStatus = 'playing' | 'won' | 'draw';
 
+type TeamId = 'tas' | 'tebe' | 'stpauli' | 'babelsberg' | 'aschafftal';
+
+interface Team {
+  id: TeamId;
+  name: string;
+  shortName: string;
+  color: string;
+  logoPath: string; // Pfad zum Logo-Bild
+}
+
 interface GameState {
   board: Board;
   currentPlayer: Player;
   status: GameStatus;
   winner: Player | null;
+  playerXTeam: Team | null;
+  playerOTeam: Team | null;
+  phase: 'selection' | 'playing' | 'gameover';
 }
 
 interface WinPattern {
@@ -134,6 +158,16 @@ interface WinPattern {
   player: Player;
 }
 ```
+
+### 6.1 Verfügbare Teams
+
+| ID | Name | Kurzname |
+|----|------|----------|
+| tas | Tasmania Berlin | TAS |
+| tebe | TeBe Berlin | TBB |
+| stpauli | FC St. Pauli | STP |
+| babelsberg | SV Babelsberg 03 | BBL |
+| aschafftal | JFG Aschafftal | ASF |
 
 ---
 
@@ -179,7 +213,16 @@ interface WinPattern {
 | AC14 | Nach O-Zug zeigt "X ist dran" | Status aktualisiert nach jedem Zug |
 | AC15 | Nach Gewinn zeigt "X/O gewinnt!" | Status zeigt Gewinner |
 
-### 7.6 Responsivität
+### 7.6 Team-Auswahl
+
+| Test-ID | Beschreibung | Erwartetes Ergebnis |
+|---------|--------------|---------------------|
+| AC16 | Spielstart zeigt Team-Auswahl | Dropdown mit 5 Teams wird angezeigt |
+| AC17 | Spieler X wählt Team | Team-Name und Logo werden angezeigt |
+| AC18 | Spieler O wählt Team | Team-Name und Logo werden angezeigt |
+| AC19 | Keine doppelten Teams | O kann nicht gleiches Team wie X wählen |
+
+### 7.7 Responsivität
 
 | Test-ID | Beschreibung | Erwartetes Ergebnis |
 |---------|--------------|---------------------|
@@ -205,7 +248,7 @@ TicTacToe/
 
 Das Spiel gilt als fertiggestellt, wenn:
 
-- [ ] Alle 17 Akzeptanzkriterien (AC01-AC17) erfüllt sind
+- [ ] Alle 19 Akzeptanzkriterien (AC01-AC19) erfüllt sind
 - [ ] Keine TypeScript-Kompilierfehler vorliegen
 - [ ] Das Spiel ohne externe Abhängigkeiten funktioniert
 - [ ] Das Layout auf Mobile und Desktop korrekt dargestellt wird
