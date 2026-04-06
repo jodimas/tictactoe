@@ -20,7 +20,7 @@ metadata:
 
 ## When to use me
 
-Verwende diesen Skill in sensiblen Projekten (z. B. TYPO3-Deployments, Server-Scripts), wo du Agent-Aktionen manuell bestätigen möchtest, um versehentliche Änderungen zu vermeiden.[cite:1][cite:3]
+Verwende diesen Skill immer in diesem Projekt, um versehentliche Änderungen zu vermeiden.[cite:1][cite:3]
 
 
 ## Usage Instructions
