@@ -48,7 +48,7 @@ export class UI {
       `<option value="${team.id}">${team.name}</option>`
     ).join('');
     
-    this.playerXSelect.innerHTML = options;
+    this.playerXSelect.innerHTML = '<option value="">-- Team wählen --</option>' + options;
     this.playerOSelect.innerHTML = '<option value="">-- Team wählen --</option>' + 
       '<option value="" disabled>-- Zuerst Spieler X --</option>';
     this.playerOSelect.disabled = true;
